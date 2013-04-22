@@ -1,0 +1,97 @@
+<html>
+<head>
+  <title>Jasmine Presentation Helpers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+</head>
+
+<body>
+  <header class="jumbrotron subhead">
+    <h1>Jasmine Presentation Helpers OMG</h1>
+  </header>
+
+  <section class="inside container function">
+    <h2 class="toBeInside">$("<span class='arg element_1'>B</span>").toBeInside( <span class="arg element_2">A</span> ) => <span class="eval"></span></h2>
+    <section class="row-fluid">
+      <div class="span4 code">
+        <pre>$.fn.toBeInside = function(element) {
+  var a = $(this).bounds(),
+      b = element.bounds();
+
+  return(
+    (a.left >= b.left) &&
+    (a.right <= b.right) &&
+    (a.top >= b.top) &&
+    (a.bottom <= b.bottom)
+  );
+};</pre>
+      </div>
+      <div class="span8 example controls">
+        <div class="example_element" id="inside_a">
+          A
+          <div class="example_element draggable" id="inside_b">B</div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section class="outside container function">
+    <h2 class="toBeOutside">$("<span class='arg element_1'>B</span>").toBeOutside( <span class="arg element_2">A</span> ) => <span class="eval"></span></h2>
+    <section class="row-fluid">
+      <div class="span4 code">
+        <pre>$.fn.toBeOutside = function(element) {
+  var a = $(this).bounds(),
+      b = element.bounds();
+
+  return((a.left >= b.left) &&
+         (a.right <= b.right) &&
+         (a.top >= b.top) &&
+         (a.bottom <= b.bottom));
+};</pre>
+      </div>
+      <div class="span8 example controls">
+        <div class="example_element" id="outside_a">A</div>
+        <div class="example_element draggable" id="outside_b">B</div>
+      </div>
+    </section>
+  </section>
+
+  <section class="overlaps container function">
+    <h2 class="toOverlap">$("<span class='arg element_1'>B</span>").toOverlap( <span class="arg element_2">A</span> ) => <span class="eval"></span></h2>
+    <section class="row-fluid">
+      <div class="span4 code">
+        <pre>jQuery.fn.toOverlap = function(element) {
+  var a = $(this).bounds(),
+      b = element.bounds();
+
+  return( !(
+      (a.bottom < b.top) ||
+      (a.top > b.bottom) ||
+      (a.right < b.left) ||
+      (a.left > b.right)
+    )
+  );
+};</pre>
+      </div>
+      <div class="span8 example controls">
+        <div class="example_element" id="overlaps_a">A</div>
+        <div class="example_element draggable" id="overlaps_b">B</div>
+      </div>
+    </section>
+  </section>
+
+
+  <section class="bounds container function">
+    <h2 class="bounds">$("<span class='arg element_1'>B</span>").bounds() => <span class="eval"></span></h2>
+  </section>
+
+
+</body>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script type="text/javascript" src="./js/jasmine_presentation_helpers.js"></script>
+<script type="text/javascript" src="./js/page.js"></script>
+</html>
