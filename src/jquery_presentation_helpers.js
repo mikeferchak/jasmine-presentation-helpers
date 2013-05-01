@@ -54,7 +54,7 @@
     if(typeof(tolerance)==='undefined') tolerance = 0;
 
     return (
-      ( a.bottom - b.bottom ) <= Math.abs(tolerance)
+      Math.abs( a.bottom - b.bottom ) <= Math.abs(tolerance)
     );
   };
 
@@ -65,7 +65,8 @@
     if(typeof(tolerance)==='undefined') tolerance = 0;
 
     return(
-      ((a.top + a.bottom) / 2 ) - (b.top + b.bottom / 2) <= Math.abs(tolerance)
+      Math.abs(((a.top + a.bottom) / 2) - ((b.top + b.bottom) / 2)) <= Math.abs(tolerance) ||
+      Math.abs(((a.left + a.right) / 2) - ((b.left + b.right) / 2)) <= Math.abs(tolerance)
     );
   };
 

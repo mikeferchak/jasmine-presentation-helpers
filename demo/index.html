@@ -13,71 +13,142 @@
   </header>
 
   <section class="inside container function">
-    <h2 class="isInside">$("<span class='arg element_1'>B</span>").isInside( <span class="arg element_2">A</span> ) => <span class="eval"></span></h2>
+    <h2 class="isInside">$("<span class='arg element_1'>B</span>").isInsideOf( <span class="arg element_2">A</span> ) => <span class="eval"></span></h2>
     <section class="row-fluid">
-      <div class="span4 code">
-        <pre>$.fn.isInside = function(element) {
+      <div class="span6 code">
+        <pre>$.fn.isInsideOf = function(element) {
   var a = $(this).bounds(),
       b = element.bounds();
 
-  return(
-    (a.left >= b.left) &&
-    (a.right <= b.right) &&
-    (a.top >= b.top) &&
-    (a.bottom <= b.bottom)
-  );
-};</pre>
+    return(
+      (a.left >= b.left) &&
+      (a.right <= b.right) &&
+      (a.top >= b.top) &&
+      (a.bottom <= b.bottom)
+    );
+  };</pre>
       </div>
-      <div class="span8 example controls">
-        <div class="example_element" id="inside_a">
-          A
-          <div class="example_element draggable" id="inside_b">B</div>
+      <div class="span6 example controls">
+        <div class="example_element a" id="inside_a">
+          <div class="example_element draggable b" id="inside_b"></div>
         </div>
       </div>
     </section>
   </section>
 
   <section class="outside container function">
-    <h2 class="toBeOutside">$("<span class='arg element_1'>B</span>").toBeOutside( <span class="arg element_2">A</span> ) => <span class="eval"></span></h2>
+    <h2 class="toBeOutside">$("<span class='arg element_1'>B</span>").isOutsideOf( <span class="arg element_2">A</span> ) => <span class="eval"></span></h2>
     <section class="row-fluid">
-      <div class="span4 code">
-        <pre>$.fn.toBeOutside = function(element) {
-  var a = $(this).bounds(),
-      b = element.bounds();
+      <div class="span6 code">
+        <pre>$.fn.isOutsideOf = function(element) {
+    var a = $(this).bounds(),
+        b = element.bounds();
 
-  return((a.left >= b.left) &&
-         (a.right <= b.right) &&
-         (a.top >= b.top) &&
-         (a.bottom <= b.bottom));
-};</pre>
+    return(
+      (a.bottom < b.top) ||
+      (a.top > b.bottom) ||
+      (a.right < b.left) ||
+      (a.left > b.right)
+    );
+  };</pre>
       </div>
-      <div class="span8 example controls">
-        <div class="example_element" id="outside_a">A</div>
-        <div class="example_element draggable" id="outside_b">B</div>
+      <div class="span6 example controls">
+        <div class="example_element a" id="outside_a"></div>
+        <div class="example_element draggable b" id="outside_b"></div>
       </div>
     </section>
   </section>
 
   <section class="overlaps container function">
-    <h2 class="toOverlap">$("<span class='arg element_1'>B</span>").toOverlap( <span class="arg element_2">A</span> ) => <span class="eval"></span></h2>
+    <h2 class="toOverlap">$("<span class='arg element_1'>B</span>").isOverlapping( <span class="arg element_2">A</span> ) => <span class="eval"></span></h2>
     <section class="row-fluid">
-      <div class="span4 code">
-        <pre>jQuery.fn.toOverlap = function(element) {
-  var a = $(this).bounds(),
-      b = element.bounds();
+      <div class="span6 code">
+        <pre>$.fn.isOverlapping = function(element) {
+    var a = $(this).bounds(),
+        b = element.bounds();
 
-  return( !(
-      (a.bottom < b.top) ||
-      (a.top > b.bottom) ||
-      (a.right < b.left) ||
-      (a.left > b.right)
-    )
-  );
-};</pre>
+    return( !(
+        (a.bottom < b.top) ||
+        (a.top > b.bottom) ||
+        (a.right < b.left) ||
+        (a.left > b.right)
+      )
+    );
+  };</pre>
       </div>
-      <div class="span8 example controls">
-        <div class="example_element" id="overlaps_a">A</div>
-        <div class="example_element draggable" id="overlaps_b">B</div>
+      <div class="span6 example controls">
+        <div class="example_element a" id="overlaps_a"></div>
+        <div class="example_element draggable b" id="overlaps_b"></div>
+      </div>
+    </section>
+  </section>
+
+
+  <section class="alignsWithTopOf container function">
+    <h2 class="alignsWithTopOf">$("<span class='arg element_1'>B</span>").alignsWithTopOf( <span class="arg element_2">A</span>, 10 ) => <span class="eval"></span></h2>
+    <section class="row-fluid">
+      <div class="span6 code">
+        <pre>$.fn.alignsWithTopOf = function(element, tolerance) {
+    var a = $(this).bounds(),
+        b = element.bounds();
+
+    if(typeof(tolerance)==='undefined') tolerance = 0;
+
+    return(
+     Math.abs( a.top - b.top ) <= Math.abs(tolerance)
+    );
+  };</pre>
+      </div>
+      <div class="span6 example controls">
+        <div class="example_element a" id="alignsWithTopOf_a"></div>
+        <div class="example_element draggable b" id="alignsWithTopOf_b"></div>
+      </div>
+    </section>
+  </section>
+
+
+  <section class="alignsWithBottomOf container function">
+    <h2 class="alignsWithBottomOf">$("<span class='arg element_1'>B</span>").alignsWithBottomOf( <span class="arg element_2">A</span>, 10 ) => <span class="eval"></span></h2>
+    <section class="row-fluid">
+      <div class="span6 code">
+        <pre>$.fn.alignsWithBottomOf = function(element, tolerance) {
+    var a = $(this).bounds(),
+        b = element.bounds();
+
+    if(typeof(tolerance)==='undefined') tolerance = 0;
+
+    return(
+     Math.abs( a.bottom - b.bottom ) <= Math.abs(tolerance)
+    );
+  };</pre>
+      </div>
+      <div class="span6 example controls">
+        <div class="example_element a" id="alignsWithBottomOf_a"></div>
+        <div class="example_element draggable b" id="alignsWithBottomOf_b"></div>
+      </div>
+    </section>
+  </section>
+
+
+  <section class="alignsWithCenterOf container function">
+    <h2 class="alignsWithCenterOf">$("<span class='arg element_1'>B</span>").alignsWithCenterOf( <span class="arg element_2">A</span>, <span class="tolerence">10</span> ) => <span class="eval"></span></h2>
+    <section class="row-fluid">
+      <div class="span6 code">
+        <pre>$.fn.alignsWithCenterOf = function(element, tolerance) {
+    var a = $(this).bounds(),
+        b = element.bounds();
+
+    if(typeof(tolerance)==='undefined') tolerance = 0;
+
+    return(
+      Math.abs(((a.top + a.bottom) / 2) - ((b.top + b.bottom) / 2)) <= Math.abs(tolerance) ||
+      Math.abs(((a.left + a.right) / 2) - ((b.left + b.right) / 2)) <= Math.abs(tolerance)
+    );
+  };</pre>
+      </div>
+      <div class="span6 example controls">
+        <div class="example_element a" id="alignsWithCenterOf_a"></div>
+        <div class="example_element draggable b" id="alignsWithCenterOf_b"></div>
       </div>
     </section>
   </section>
